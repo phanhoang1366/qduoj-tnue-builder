@@ -68,6 +68,7 @@ jobs:
         shell: bash
         run: |
           cd OnlineJudge
+          git config user.email "johndoe@example.com" && git config user.name "John Doe"
           git am --signoff ../0001-Change-the-URL-for-the-Front-end.patch
 
       # Build and push Docker image with Buildx (don't push on PR)
