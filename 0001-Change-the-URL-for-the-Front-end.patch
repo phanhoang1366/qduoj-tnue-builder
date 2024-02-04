@@ -1,0 +1,25 @@
+From f43ece40a97ae030daed67851f558307da902693 Mon Sep 17 00:00:00 2001
+From: Phan Huy Hoang <phanhoang1366@gmail.com>
+Date: Sun, 4 Feb 2024 12:20:12 +0700
+Subject: [PATCH] Change the URL for the Front-end
+
+---
+ Dockerfile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Dockerfile b/Dockerfile
+index d0190fc1..43dcdc47 100644
+--- a/Dockerfile
++++ b/Dockerfile
+@@ -5,7 +5,7 @@ WORKDIR /app
+ RUN <<EOS
+ set -ex
+ apk add unzip
+-wget https://github.com/QingdaoU/OnlineJudgeFE/releases/download/oj_2.7.5/dist.zip
++wget https://github.com/phanhoang1366/OnlineJudgeFE/releases/download/v2024.02.03/dist.zip
+ unzip dist.zip
+ rm -f dist.zip
+ EOS
+-- 
+2.43.0
+
