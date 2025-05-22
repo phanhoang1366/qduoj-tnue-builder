@@ -1,0 +1,35 @@
+diff --git a/Dockerfile b/Dockerfile
+index d0190fc1..f984733c 100644
+--- a/Dockerfile
++++ b/Dockerfile
+@@ -5,7 +5,7 @@ WORKDIR /app
+ RUN <<EOS
+ set -ex
+ apk add unzip
+-wget https://github.com/QingdaoU/OnlineJudgeFE/releases/download/oj_2.7.5/dist.zip
++wget https://github.com/phanhoang1366/OnlineJudgeFE/releases/download/v2025.05.22/dist.zip
+ unzip dist.zip
+ rm -f dist.zip
+ EOS
+diff --git a/contest/serializers.py b/contest/serializers.py
+index 356cddae..8d9e416d 100644
+--- a/contest/serializers.py
++++ b/contest/serializers.py
+@@ -83,7 +83,7 @@ class ACMContestRankSerializer(serializers.ModelSerializer):
+         super().__init__(*args, **kwargs)
+ 
+     def get_user(self, obj):
+-        return UsernameSerializer(obj.user, need_real_name=self.is_contest_admin).data
++        return UsernameSerializer(obj.user, need_real_name=obj.user.is_authenticated).data
+ 
+ 
+ class OIContestRankSerializer(serializers.ModelSerializer):
+@@ -98,7 +98,7 @@ class OIContestRankSerializer(serializers.ModelSerializer):
+         super().__init__(*args, **kwargs)
+ 
+     def get_user(self, obj):
+-        return UsernameSerializer(obj.user, need_real_name=self.is_contest_admin).data
++        return UsernameSerializer(obj.user, need_real_name=obj.user.is_authenticated).data
+ 
+ 
+ class ACMContesHelperSerializer(serializers.Serializer):
