@@ -1,0 +1,13 @@
+diff --git a/Dockerfile b/Dockerfile
+index d0190fc1..f984733c 100644
+--- a/Dockerfile
++++ b/Dockerfile
+@@ -5,7 +5,7 @@ WORKDIR /app
+ RUN <<EOS
+ set -ex
+ apk add unzip
+-wget https://github.com/QingdaoU/OnlineJudgeFE/releases/download/oj_2.7.5/dist.zip
++wget https://github.com/phanhoang1366/OnlineJudgeFE/releases/download/v2025.05.22/dist.zip
+ unzip dist.zip
+ rm -f dist.zip
+ EOS
