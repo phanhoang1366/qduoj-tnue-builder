@@ -47,3 +47,46 @@ index 2c09a6c9..fad90c74 100644
  
  class CreateProblemCodeTemplateSerializer(serializers.Serializer):
      pass
+diff --git a/problem/views/admin.py b/problem/views/admin.py
+index 5ce9413b..3bf719c4 100644
+--- a/problem/views/admin.py
++++ b/problem/views/admin.py
+@@ -5,6 +5,7 @@ import os
+ import tempfile
+ import zipfile
+ from wsgiref.util import FileWrapper
++from decimal import Decimal
+ 
+ from django.conf import settings
+ from django.db import transaction
+@@ -186,13 +187,28 @@ class ProblemBase(APIView):
+             data["spj_language"] = None
+             data["spj_code"] = None
+         if data["rule_type"] == ProblemRuleType.OI:
+-            total_score = 0
++            # total_score = 0
++            # for item in data["test_case_score"]:
++            #     if item["score"] <= 0:   # item["score"] is now a string for some reason
++            #         return "Invalid score"
++            #     else:
++            #         total_score += item["score"]
++            # data["total_score"] = total_score
++            total_score = Decimal(0)
+             for item in data["test_case_score"]:
++                if isinstance(item["score"], str):
++                    try:
++                        item["score"] = Decimal(item["score"])
++                    except ValueError:
++                        return "Invalid score"
+                 if item["score"] <= 0:
+                     return "Invalid score"
+                 else:
+                     total_score += item["score"]
+-            data["total_score"] = total_score
++            # Check if total_score can be an integer, as we don't want to change the model field type
++            if total_score != int(total_score):
++                return "Total score must be an integer"
++            data["total_score"] = int(total_score)
+         data["languages"] = list(data["languages"])
+ 
+ 
