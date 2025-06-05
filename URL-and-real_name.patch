@@ -33,3 +33,17 @@ index 356cddae..8d9e416d 100644
  
  
  class ACMContesHelperSerializer(serializers.Serializer):
+diff --git a/problem/serializers.py b/problem/serializers.py
+index 2c09a6c9..fad90c74 100644
+--- a/problem/serializers.py
++++ b/problem/serializers.py
+@@ -24,8 +24,7 @@ class CreateSampleSerializer(serializers.Serializer):
+ class CreateTestCaseScoreSerializer(serializers.Serializer):
+     input_name = serializers.CharField(max_length=32)
+     output_name = serializers.CharField(max_length=32)
+-    score = serializers.IntegerField(min_value=0)
+-
++    score = serializers.DecimalField(max_digits=5, decimal_places=2, min_value=0)
+ 
+ class CreateProblemCodeTemplateSerializer(serializers.Serializer):
+     pass
